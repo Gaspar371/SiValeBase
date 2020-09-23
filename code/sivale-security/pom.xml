@@ -12,21 +12,21 @@
 	</parent>
 
 	<groupId>com.sivale</groupId>
-	<artifactId>clientes</artifactId>
+	<artifactId>sivale-security</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
-	<name>clientes</name>
-	<description>Microservicio de Clientes</description>
+	<name>SiVale Security</name>
+	<description>SiVale Security</description>
 
 	<properties>
 		<java.version>10</java.version>
 	</properties>
 
 	<modules>
-		<module>commons</module>
-		<module>persistence</module>
-		<module>services</module>
-		<module>application</module>
+		<module>sivale-security-commons</module>
+		<module>sivale-security-persistence</module>
+		<module>sivale-security-services</module>
+		<module>sivale-security-application</module>
 	</modules>
 
 	<dependencyManagement>
@@ -75,20 +75,20 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.sivale.clientes</groupId>
-				<artifactId>commons</artifactId>
+				<groupId>com.sivale.sivale-security</groupId>
+				<artifactId>sivale-security-commons</artifactId>
 				<version>1.0</version>
 			</dependency>
 
 			<dependency>
-				<groupId>com.sivale.clientes</groupId>
-				<artifactId>services</artifactId>
+				<groupId>com.sivale.sivale-security</groupId>
+				<artifactId>sivale-security-services</artifactId>
 				<version>1.0</version>
 			</dependency>
 
 			<dependency>
-				<groupId>com.sivale.clientes</groupId>
-				<artifactId>persistence</artifactId>
+				<groupId>com.sivale.sivale-security</groupId>
+				<artifactId>sivale-security-persistence</artifactId>
 				<version>1.0</version>
 			</dependency>
 

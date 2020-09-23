@@ -10,3 +10,15 @@ buildNumber.properties
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
+
+code/sivale-security/sivale-security-application/.DS_Store
+
+*.log
+
+code/sivale-security/sivale-security-application/src/main/java/com/sivale/.DS_Store
+
+code/sivale-security/sivale-security-services/.DS_Store
+
+code/sivale-security/sivale-security-services/src/main/java/.DS_Store
+
+code/sivale-security/sivale-security-services/src/main/java/com/sivale/.DS_Store

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.sivale</groupId>
+		<artifactId>sivale-security</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<groupId>ccom.sivale.sivale-security</groupId>
+	<artifactId>sivale-security-application</artifactId>
+	<name>Security Aplication</name>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sivale.sivale-security</groupId>
+			<artifactId>sivale-security-commons</artifactId>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>com.sivale.sivale-security</groupId>
+			<artifactId>sivale-security-persistence</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sivale.sivale-security</groupId>
+			<artifactId>sivale-security-services</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sivale.architecture-spring</groupId>
+			<artifactId>architecture-spring-application</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>2.3.0.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sivale.architecture-spring</groupId>
+			<artifactId>architecture-spring-healtcheck</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+			<version>2.3.0.RELEASE</version>
+			<configuration>
+				<mainClass>com.sivale.application.Application</mainClass>
+                <!--<jvmArguments> -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvmArguments>-->
+				</configuration>
+			</plugin>
+	</plugins>
+		<finalName>application</finalName>
+	</build>
+</project>

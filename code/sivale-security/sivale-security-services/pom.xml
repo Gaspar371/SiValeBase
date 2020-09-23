@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.sivale</groupId>
+		<artifactId>sivale-security</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<groupId>com.sivale.sivale-security</groupId>
+	<artifactId>sivale-security-services</artifactId>
+	<name>Security Services</name>
+	<packaging>jar</packaging>
+
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sivale.sivale-security</groupId>
+			<artifactId>sivale-security-commons</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sivale.architecture-base</groupId>
+			<artifactId>architecture-base-controller</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sivale.sivale-security</groupId>
+			<artifactId>sivale-security-persistence</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sivale.architecture-base</groupId>
+			<artifactId>architecture-base-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sivale.architecture-spring</groupId>
+			<artifactId>architecture-spring-exception-handler</artifactId>
+		</dependency>
+
+
+		<!-- Spring Boot starters -->
+
+		<!-- Thymeleaf -->
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+		</dependency>
+
+		<!-- Additional libraries -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Webjars -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>datatables</artifactId>
+			<version>1.10.19</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>js-cookie</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>webjars-locator</artifactId>
+			<version>0.34</version>
+		</dependency>
+
+		<!-- Runtime dependencies -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+	</dependencies>
+
+
+</project>
