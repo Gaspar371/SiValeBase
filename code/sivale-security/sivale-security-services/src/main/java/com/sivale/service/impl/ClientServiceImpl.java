@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.sivale.architecture.service.BaseService;
 import com.sivale.dao.UserDAO;
 import com.sivale.entity.KUser;
+import com.sivale.security.repository.CompaniesRepository;
 import com.sivale.service.CardService;
 import com.sivale.service.ClientService;
 import com.sivale.sivaleclientes.cliente.DetailClientTO;
@@ -23,6 +24,9 @@ public class ClientServiceImpl extends BaseService implements ClientService{
 	
 	@Autowired
 	private CardService cardService;
+
+	@Autowired
+	private CompaniesRepository companiesRepository;
 	
 	public List<DetailClientTO> getAllClients() {
 
