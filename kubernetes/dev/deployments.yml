@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sivale-clientes-deployment
+  labels:
+    app: sivale-clientes-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sivale-clientes-app
+  template:
+    metadata:
+      labels:
+        app: sivale-clientes-app
+    spec:
+      containers:
+      - name: sivalecontainerclientes
+        image: sivale/sivale-clientes:1.0
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+          capabilities:
+             add:
+               - ALL
+        ports:
+        - containerPort: 8082            
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sivale-clientes-service
+spec:
+  selector:
+    app: sivale-clientes-app
+  ports:
+    - port: 8082 # Default port for image
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sivale-clientes-write-deployment
+  labels:
+    app: sivale-clientes-write-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sivale-clientes-write-app
+  template:
+    metadata:
+      labels:
+        app: sivale-clientes-write-app
+    spec:
+        containers:
+        - name: sivalecontainerclienteswrite
+          image: sivale/sivale-clientes:1.0
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+            capabilities:
+               add:
+                 - ALL
+          ports:
+          - containerPort: 8082              
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sivale-clientes-service-write
+spec:
+  selector:
+    app: sivale-clientes-write-app
+  ports:
+    - port: 8082 # Default port for image
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sivale-cards-deployment
+  labels:
+    app: sivale-cards-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sivale-cards-app
+  template:
+    metadata:
+      labels:
+        app: sivale-cards-app
+    spec:
+        containers:
+        - name: sivalecontainerclientecards
+          image: sivale/sivale-cards:1.0
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+            capabilities:
+               add:
+                 - ALL
+          ports:
+          - containerPort: 8082              
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sivale-cards-service
+spec:
+  selector:
+    app: sivale-cards-app
+  ports:
+    - port: 8082 # Default port for image

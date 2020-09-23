@@ -1,0 +1,21 @@
+#FROM openjdk:10.0.2-13-jre-slim-sid
+FROM adoptopenjdk/openjdk11:jre-11.0.3_7-alpine
+#FROM containersoga/forticonnect
+FROM store/oracle/jdk:11
+
+RUN mkdir  /app /server
+RUN cat /etc/os-release
+
+RUN yum -y install dpkg-reconfigure
+RUN dpkg-reconfigure -f noninteractive tzdata
+RUN date
+
+
+
+CMD ls -l /AppAgent
+#ADD /rest/target/rest.jar /server
+
+#EXPOSE 9080 9443
+#CMD ["/root/mainentry.sh","/server/rest.jar"]
+
+ENTRYPOINT ["java", "-jar","/server/rest.jar"]

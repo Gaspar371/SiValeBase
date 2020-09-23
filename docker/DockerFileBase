@@ -1,0 +1,26 @@
+#FROM openjdk:10.0.2-13-jre-slim-sid
+FROM adoptopenjdk/openjdk11:jre-11.0.3_7-alpine
+#FROM store/oracle/jdk:11
+
+RUN mkdir  /app /server
+RUN cat /etc/os-release
+
+#iamgenes oracle linux
+#RUN timedatectl list-timezones
+#RUN timedatectl set-timezone America/Mexico_City
+
+#iamgenes ubuntu
+
+#RUN ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
+#RUN echo "America/Mexico_City" > /etc/timezone
+#RUN dpkg-reconfigure -f noninteractive tzdata
+RUN date
+
+RUN apk update && apk add bash
+RUN apk add tzdata
+RUN ls /usr/share/zoneinfo
+RUN cp /usr/share/zoneinfo/America/Mexico_City /etc/localtime
+
+CMD ls -l /AppAgent
+EXPOSE 8082
+ENTRYPOINT ["java", "-jar","/server/application.jar"]

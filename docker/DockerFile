@@ -1,0 +1,3 @@
+FROM sivale/sivale-base:1.0
+ADD /target/application.jar /server
+

@@ -1,0 +1,101 @@
+currentBuild.displayName= "NNIS - "+ currentBuild.number
+pipeline{
+    tools {
+        maven "m3.5.0"    
+        git "gitLinux"
+    }
+    agent { node { label 'slvdev'} }
+    stages {    
+        stage(" Compile Arquitectura "){
+                when { changeset "code-back/architecture-base/*"}            
+                steps {                    
+                    sh 'echo $JAVA_HOME'                                     
+                    sh 'mvn -f code/architecture-base/pom.xml clean install -Poracle -DskipTests'                                     
+                    }
+                }
+
+        stage(" Compile Clientes "){ 
+            parallel {
+                
+                stage(" Self-Contained Service Maestros "){
+               // when { changeset "code-back/catalogos-maestros/*"}            
+                    steps {                    
+                        sh 'mvn -f code/clientes/pom.xml clean compile'                                     
+                    }
+                }
+            }
+        }
+        stage(" sonar "){
+
+                steps{                    
+                    sh "mvn -f code/clientes/pom.xml sonar:sonar -Psonar"                                        
+                }   
+            }
+
+        stage(" Generate Jar"){                      
+            parallel {
+                stage(" Self-Contained Service Maestros "){            
+                when { changeset "code/clientes/*"}
+                steps {
+                    
+                    sh 'mvn -f code/clientes/pom.xml clean install'                                     
+                    //sh 'mvn -f code/clientes/pom.xml clean install'                                                         
+                    }
+                }                 
+            }
+        }
+        stage('Build Angular') {
+            when { changeset "frontend/*"}
+                    steps {
+                        echo 'Building Frontend Angular'
+                        dir ('frontend/'){
+                            sh 'npm install'
+                            sh 'npm run build'
+                        }
+                    }
+        }               
+            stage("Image Base"){                     
+                    steps {
+                            echo 'Imagen Base'
+                            script {                                
+                                sh 'docker build --no-cache -t sivale/sivale-base:1.0 -f docker/DockerFileBase ./docker/'                                             
+                                sh 'docker push sivale/sivale-base:1.0'                 
+                            }                                
+                        }
+                }
+              stage(" Image Docker Back "){  
+                    //when { changeset "code-back/catalogos-maestros/*"}
+                        steps {
+                            echo ' generando la  imagen '
+                            script {                                
+                                sh 'docker build --no-cache -t sivale/sivale-clientes:1.0 -f docker/DockerFile ./code/clientes/application/'                                             
+                                sh 'docker push sivale/sivale-clientes:1.0'                 
+                            }                                
+                        }
+                }           
+        stage(" Delete Kubernetes  "){            
+            parallel {
+                stage(" Deploy K8S Service Maestros "){
+              //  when { changeset "code-back/catalogos-maestros/*"}            
+                steps {                    
+                        script {   
+                            try {                            
+                                sh 'kubectl delete deployment sivale-clientes'                        
+                            } catch(err) {
+                                echo ' not found'
+                            }  
+                        }
+                    }
+                }                        
+        }
+        stage(" Deploy Kubernetes  "){            
+            steps {    
+                script {                                
+                     echo ' iniciando despliegue '                       
+                        sh 'kubectl apply -f kubernetes/dev/deployments.yml'                        
+                        sh 'kubectl apply -f kubernetes/dev/ingress.yml'                 
+                }                             
+            }
+        }
+    }
+}
